@@ -1,0 +1,9 @@
+
+public class Bill extends Waiter
+{
+    private int TableId;
+
+    //---- CONSTRUCTOR ----
+
+    
+}
