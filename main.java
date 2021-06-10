@@ -22,7 +22,7 @@ public class main
                 break;
         
             case 2:
-            System.out.println(a.Name + " "+ a.Prename + " waiter id : " + a.get_id() + " waiter Salary : " + a.get_Salary());
+            System.out.println(a.get_Name() + " "+ a.get_Prename() + " waiter id : " + a.get_id() + " waiter Salary : " + a.get_Salary());
             System.out.println(a.get_Salary());
                
                 break;

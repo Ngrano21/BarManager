@@ -1,10 +1,10 @@
 
 public class Personne 
 {
-    public String Name;
-    public String Prename;
-    public int Age;
-    public String Adress;
+    private String Name;
+    private String Prename;
+    private int Age;
+    private String Adress;
 
     //---- CONSTRUCTOR ----
     
