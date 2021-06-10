@@ -1,5 +1,3 @@
-import javax.lang.model.util.ElementScanner14;
-
 public class main 
 {
     public static void main(String[] args) 
@@ -30,10 +28,5 @@ public class main
             default:
                 break;
         }
-
-        
-        
-
-
     }    
 }
