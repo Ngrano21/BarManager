@@ -6,5 +6,10 @@ public class Bill extends Waiter
 
     //---- CONSTRUCTOR ----
 
+    public Waiter()
+    {
+        TableId++;
+    }
+
     
 }
