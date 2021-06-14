@@ -18,19 +18,19 @@ public class Waiter extends Personne
 
       public int get_id()
       {
-          return id;
+          return this.id;
       }
 
       public int get_Salary()
       {
-          return Salary;
+          return this.Salary;
       }
 
        //---- SETTERS ----
 
       public void set_Salary(int a)
       {
-          Salary = a;
+          this.Salary = a;
       }
 
 }

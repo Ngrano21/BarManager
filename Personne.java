@@ -6,6 +6,7 @@ public class Personne
     private int Age;
     private String Adress;
 
+
     //---- CONSTRUCTOR ----
     
     public Personne()
@@ -21,48 +22,48 @@ public class Personne
         set_Adress(a);
     }
 
-    //---------- GETERS ---------
+    //---------------- GETERS ------------------
 
 
     String get_Name()
     {
-        return Name;
+        return this.Name;
     }
 
     String get_Prename()
     {
-        return Prename;
+        return this.Prename;
     }
 
     String get_Adress()
     {
-        return Adress;
+        return this.Adress;
     }
 
     int get_Age()
     {
-        return Age;
+        return this.Age;
     }
 
     //------- SETERS ---------
 
     void set_Prename(String t)
     {
-        Prename = t;
+        this.Prename = t;
     }
 
     void set_name(String t)
     {
-        Name = t;
+        this.Name = t;
     }
 
     void set_Adress(String t)
     {
-        Adress = t;
+        this.Adress = t;
     }
 
     void set_Age(int t)
     {
-        Age = t;
+        this.Age = t;
     }
 }
