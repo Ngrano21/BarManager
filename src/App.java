@@ -73,6 +73,5 @@ public class App
         } while(continuer == 1);
         System.out.print("\n");
         System.out.print("Bye!, revenez bientot😘");
-        System.out.print("\n");
     }
 }
