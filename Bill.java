@@ -1,5 +1,5 @@
 
-public class Bill extends Waiter
+public class Bill
 {
     
 }

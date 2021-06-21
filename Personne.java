@@ -1,33 +1,25 @@
 
 abstract class Personne
 {
-    protected String name;
-    protected String prename;
+    protected String fullname;
     protected int age;
     protected String adress;
 
-
+    
     //---- CONSTRUCTOR ----
 
-    public Personne(String name, String prename, String adress, int age)
+    public Personne(String fullname, String adress, int age)
     {
-        this.name = name;
-        this.prename = prename;
+        this.fullname = fullname;
         this.age = age;
         this.adress = adress;
     }
 
     //---------------- GETERS ------------------
 
-
-    String get_Name()
+    String get_fullname()
     {
-        return this.name;
-    }
-
-    String get_Prename()
-    {
-        return this.prename;
+        return this.fullname;
     }
 
     String get_Adress()
@@ -42,14 +34,9 @@ abstract class Personne
 
     //------- SETERS ---------
 
-    void set_Prename(String t)
+    void set_fullname(String t)
     {
-        this.prename = t;
-    }
-
-    void set_name(String t)
-    {
-        this.name = t;
+        this.fullname = t;
     }
 
     void set_Adress(String t)
