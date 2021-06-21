@@ -12,34 +12,55 @@ public class App
         System.out.println("=========                                            =========");
         System.out.println("==============================================================");
 
-        // pour acceder a l'administration on va utiliser le nombre 1172
+        
         
         // ====> client
+        // helper variables and functions
+        String m2 = "\n\n";
+        String m1 = "\n"; 
+        public void write(value) {
+            System.out.println(value);
+        }
+        // 
+        // pour acceder a l'administration on va utiliser le nombre 1172
+        System.out.println(m2);
         String client_first_word = "i wanna ";
         System.out.println("How can we help you?");
-        System.out.println("1. "+client_first_word+" See the menu");
-        System.out.println("2. "+client_first_word+" Leave the Resto");
+        System.out.println("1. "+client_first_word+"See the menu");
+        System.out.println("2. "+client_first_word+"Leave the Resto");
         
         int choice = 0;
         do {
             Scanner sc = new Scanner(System.in);
+            System.out.print(m1);
+            System.out.print(">>> ");
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
+                    System.out.println(m1);
                     System.out.println("Here's our resto menu!");
+                    System.out.println("======================");
+                    String client_second_word = "i choose ";
+                    System.out.println("1. "+client_second_word+" Fresh Cow Meat");
+                    System.out.println("2. "+client_second_word+" Akabenze");
+                    System.out.println("3. "+client_second_word+" Beshu");
+                    System.out.println("4. "+client_second_word+" Urwarwa");
+                    System.out.println(m1);
                     break;
                 case 2:
+                    System.out.println(m1);
                     System.out.println("OK, thanks for choosing us! welcome back again😘");
+                    System.out.println(m1);
                     break;
                 default:
+                    System.out.println(m1);
                     System.out.println("I don't know what you mean (0_0)");
+                    System.out.println(m1);
                     break;
             }
         } while(choice != 1 && choice != 2);
         
-        // String client_second_word = "i choose ";
-        // System.out.println("1. "+client_second_word+" See the menu");
-        // System.out.println("2. "+client_second_word+" See the menu");
+        
 
         // **** afficher des options
         /*
