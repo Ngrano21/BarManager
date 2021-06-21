@@ -18,10 +18,7 @@ public class App
         // helper variables and functions
         String m2 = "\n\n";
         String m1 = "\n"; 
-        public void write(value) {
-            System.out.println(value);
-        }
-        // 
+        
         // pour acceder a l'administration on va utiliser le nombre 1172
         System.out.println(m2);
         String client_first_word = "i wanna ";
