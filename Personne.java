@@ -1,25 +1,20 @@
 
-public class Personne 
+abstract class Personne
 {
-    private String Name;
-    private String Prename;
-    private int Age;
-    private String Adress;
+    protected String name;
+    protected String prename;
+    protected int age;
+    protected String adress;
 
 
     //---- CONSTRUCTOR ----
-    
-    public Personne()
-    {
 
-    }
-
-    public Personne(String n, String p, String a, int b)
+    public Personne(String name, String prename, String adress, int age)
     {
-        set_name(n);
-        set_Prename(p);
-        set_Age(b);
-        set_Adress(a);
+        this.name = name;
+        this.prename = prename;
+        this.age = age;
+        this.adress = adress;
     }
 
     //---------------- GETERS ------------------
@@ -27,43 +22,43 @@ public class Personne
 
     String get_Name()
     {
-        return this.Name;
+        return this.name;
     }
 
     String get_Prename()
     {
-        return this.Prename;
+        return this.prename;
     }
 
     String get_Adress()
     {
-        return this.Adress;
+        return this.adress;
     }
 
     int get_Age()
     {
-        return this.Age;
+        return this.age;
     }
 
     //------- SETERS ---------
 
     void set_Prename(String t)
     {
-        this.Prename = t;
+        this.prename = t;
     }
 
     void set_name(String t)
     {
-        this.Name = t;
+        this.name = t;
     }
 
     void set_Adress(String t)
     {
-        this.Adress = t;
+        this.adress = t;
     }
 
     void set_Age(int t)
     {
-        this.Age = t;
+        this.age = t;
     }
 }

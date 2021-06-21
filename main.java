@@ -12,7 +12,7 @@ public class main
             case 1:
               if(Password == "PASS")
               {
-
+                
               }
               else
                System.exit(1);
