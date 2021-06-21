@@ -6,6 +6,7 @@ public class App
 {
     public static void main(String[] args) 
     {
+        int continuer = 0;
         do {
             System.out.println("==============================================================");
             System.out.println("=========                                            =========");
@@ -46,7 +47,7 @@ public class App
                         break;
                     case 2:
                         System.out.println(m1);
-                        System.out.println("OK, merci pour votre visit! revenez bientot😘");
+                        System.out.println("OK, merci pour votre visite...");
                         System.out.println(m1);
                         break;
                     case 1172:
@@ -66,6 +67,12 @@ public class App
                         break;
                 }
             } while(choice != 1 && choice != 2 && choice != 1172);
-        } while(true);
+            System.out.print("vous voulez un peu de nos services (1 = oui, 0 = non) >>>...");
+            Scanner sc = new Scanner(System.in);
+            continuer = sc.nextInt();
+        } while(continuer == 1);
+        System.out.print("\n");
+        System.out.print("Bye!, revenez bientot😘");
+        System.out.print("\n");
     }
 }
