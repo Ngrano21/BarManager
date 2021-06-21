@@ -2,31 +2,32 @@ public class main
 {
     public static void main(String[] args) 
     {
-        int chx=2;
-        String Password = "abcd";
+        System.out.println("==============================================================");
+        System.out.println("=========                                            =========");
+        System.out.println("====               WELCOME ON OUR RESTAURANT🍖            ====");
+        System.out.println("=========                                            =========");
+        System.out.println("==============================================================");
 
-        System.out.println("\t==== SYSTEM MANNAGEMENT ===\n\n");
-        Waiter a = new Waiter("Ngabirano" , "Donald" , "Gihosha", 22, 235499);
+        // pour acceder a l'administration on va utiliser le nombre 15555
         
-        switch (chx) {
-            case 1:
-              if(Password == "PASS")
-              {
-                
-              }
-              else
-               System.exit(1);
-                
-                break;
-        
-            case 2:
-            System.out.println(a.get_Name() + " "+ a.get_Prename() + " waiter id : " + a.get_id() + " waiter Salary : " + a.get_Salary());
-            System.out.println(a.get_Salary());
-               
-                break;
+        // ====> client
+        // **** afficher des options
+        /*
+            - demander menu (liste des produits dispo)
+            - choisir nourriture, boisson ou les deux
+            - demander facture
+            - sortir du resto (un message d'au revoir)
+        */
 
-            default:
-                break;
-        }
-    }    
+        // ====> admin
+        // **** afficher des options
+        /*
+            - ajouter un produit
+            - voir tous les produits
+            - suprimmer un produit
+            - mettre a jour un produit
+            - voir tout les commandes
+            - generer une facture a partir des commandes
+        */
+    }
 }
