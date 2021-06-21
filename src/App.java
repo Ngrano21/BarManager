@@ -49,33 +49,20 @@ public class App
                     System.out.println("OK, thanks for choosing us! welcome back again😘");
                     System.out.println(m1);
                     break;
+                case 1172:
+                    System.out.println("1. ajouter un produit");
+                    System.out.println("2. voir tous les produits");
+                    System.out.println("3. suprimmer un produit");
+                    System.out.println("4. mettre a jour un produit");
+                    System.out.println("5. voir tout les commandes");
+                    System.out.println("6. generer une facture a partir des commandes");
+                    break;
                 default:
                     System.out.println(m1);
                     System.out.println("I don't know what you mean (0_0)");
                     System.out.println(m1);
                     break;
             }
-        } while(choice != 1 && choice != 2);
-        
-        
-
-        // **** afficher des options
-        /*
-            - demander menu (liste des produits dispo)
-            - choisir nourriture, boisson ou les deux
-            - demander facture
-            - sortir du resto (un message d'au revoir)
-        */
-
-        // ====> admin
-        // **** afficher des options
-        /*
-            - ajouter un produit
-            - voir tous les produits
-            - suprimmer un produit
-            - mettre a jour un produit
-            - voir tout les commandes
-            - generer une facture a partir des commandes
-        */
+        } while(choice != 1 && choice != 2 && choice != 1172);
     }
 }
