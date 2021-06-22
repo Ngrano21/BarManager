@@ -54,9 +54,13 @@ public class App
                     case 1172:
                         System.out.println(m1);
                         System.out.println("1. ajouter un produit");
+                        //addProduct=>Products.java
                         System.out.println("2. voir tous les produits");
+                        //showProduct=>Products.java
                         System.out.println("3. suprimmer un produit");
+                        //deleteProduct=>Products.java
                         System.out.println("4. mettre a jour un produit");
+                        //updateProduct
                         System.out.println("5. voir tout les commandes");
                         System.out.println("6. generer une facture a partir des commandes");
                         System.out.println(m1);
