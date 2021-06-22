@@ -33,6 +33,7 @@ public class App
                 System.out.print(m1);
                 System.out.print(">>> ");
                 choice = sc.nextInt();
+                sc.close();
                 switch (choice) {
                     case 1:
                         System.out.println(m1);
@@ -70,6 +71,7 @@ public class App
             System.out.print("vous voulez un peu de nos services (1 = oui, 0 = non) >>>...");
             Scanner sc = new Scanner(System.in);
             continuer = sc.nextInt();
+            sc.close();
         } while(continuer == 1);
         System.out.print("\n");
         System.out.print("Bye!, revenez bientot😘");
