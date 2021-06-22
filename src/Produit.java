@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Product {
 	private int id;
      private String name;
-     private int price;
+     private float price;
      private String category;
      
      private Hashtable<Integer, Product> product_list = new  Hashtable<Integer,Product>();
@@ -36,10 +36,10 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 	public String getCategory() {
