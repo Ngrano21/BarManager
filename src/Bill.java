@@ -1,8 +1,11 @@
-package facture;
+package src;
 
 import java.util.*;
 
 public class Bill{
+
+	Product product=new Product();
+
 	static Scanner kbd = new Scanner(System.in);
 	private Hashtable<String, Integer> commandesQuantite = new Hashtable<>();
 	private Hashtable<String, Integer> commandesPrix = new Hashtable<>();
@@ -18,7 +21,7 @@ public class Bill{
 	public String commande() {
 		
 		System.out.println("------------Liste des produits--------------");
-		Produit.showProduits();
+		product.showProduct();
 		
 		boolean b = false;
 		String commandeClient;
@@ -29,26 +32,26 @@ public class Bill{
 			
 			System.out.print("Votre Commande ici : ");
 			commandeClient = kbd.next();
-			for (Produit produit : Produit.listeProduit) {
-				if(!produit.nom.equalsIgnoreCase(commandeClient)) {
+			for (Product produit : product.product_list.values()) {
+				if(!produit.getName().equalsIgnoreCase(commandeClient)) {
 					b=true;
 				}
 				else {
 					b = false;
-					commandeClient = produit.nom;
-					prixCommande = produit.prix;
+					commandeClient = produit.getName();
+					prixCommande = produit.getPrice();
 					break;
 				}
 			}
 			
 			if(b) {
-				System.out.println("Le produit saisi ne figure pas parmi ceux affichés ci-dessus.");
+				System.out.println("Le produit saisi ne figure pas parmi ceux affichï¿½s ci-dessus.");
 				System.out.println("Veuillez saisir un produit qui figure parmi ces derniers.");
 			}
 			
 		}while(b);
 		
-		System.out.print("Entrez la quantité : ");
+		System.out.print("Entrez la quantitï¿½ : ");
 		quantiteCommande = kbd.nextInt();
 		System.out.println("Veuillez patientez!!\nVotre commande arrive bientot.");
 		if(commandesQuantite.containsKey(commandeClient)) {

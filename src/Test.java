@@ -24,7 +24,7 @@ public class Test {
 		do {
 			
 			do {
-				System.out.println("1. Faire une commande\n2. Voir les produits commandés\n3. Quitter");
+				System.out.println("1. Faire une commande\n2. Voir les produits commandï¿½s\n3. Quitter");
 				reponse = kbd.nextInt();
 			}while(reponse > 3);
 		
@@ -33,7 +33,7 @@ public class Test {
 			}
 			else if(reponse == 2) {
 				Iterator<String> tabCle = bill.getCommandesQuantite().keySet().iterator();
-				System.out.println("------------Produits commandés-------------");
+				System.out.println("------------Produits commandï¿½s-------------");
 				for (int i = 0; i < bill.getCommandesPrix().size(); i++) {
 					String commandec = null;
 					if(tabCle.hasNext()) {
