@@ -140,9 +140,17 @@ public class Product {
 	 * @param product
 	 */
 	public void addProduct(Product product) {
-		product=new Product(insertid(),insertfullname(),insertprice(),insertcategory());
-		product_list.put(product.id,product);
-		System.out.println("Votre démandée est execute avec succèes, le produit est ajouté avec succèes!");
+		do{
+			product=new Product(insertid(),insertfullname(),insertprice(),insertcategory());
+			if(product_list.containsKey(product.id)==false){
+				product_list.put(product.id,product);
+				System.out.println("Votre démandée est execute avec succèes, le produit est ajouté avec succèes!");
+			}
+			else {
+				
+				System.out.println("L'identificateur (id) de l'élement saisi est déja pris par un autre élement produit dans notre restaurant!\nVeuillez réessayer  cher Administrateur!");
+			}
+		}while(product_list.containsKey(product.id)==true);
     }
 	
 	
