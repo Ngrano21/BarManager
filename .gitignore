@@ -1,2 +1,2 @@
-*.class
+src/*.class
 *.txt
