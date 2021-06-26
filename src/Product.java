@@ -24,6 +24,29 @@ public class Product {
     public static void success_notifer() {
     	 System.out.println("Cher Administrateur,Félicitation, vous avez bien saisi !");
     }
+	public static void adding_initiale_product_in_product_list(){
+		Product produit = new Product(1,"Pizza",15000,"Nourriture");
+		Product produit1 = new Product(2,"Jus d'orange",1000,"Boisson");
+		Product produit2 = new Product(3,"Lait frais",1200,"Boisson");
+		Product produit3 = new Product(4,"Hamburger",15000,"Nourriture");
+		Product produit4 = new Product(5,"Kebab",4000,"Nourriture");
+		Product produit5 = new Product(6,"Primus",1500,"Boisson");
+		Product produit6 = new Product(7,"Capati",500,"Nourriture");
+		Product produit8 = new Product(8,"Omolette",2000,"Nourriture");
+		Product produit9 = new Product(9,"Café",2500,"Boisson");
+		Product produit7 = new Product(10,"Champagne",25000,"Boisson");
+		produit.add(produit2);
+		produit.add(produit1);
+		produit.add(produit);
+		produit.add(produit3);
+		produit.add(produit4);
+		produit.add(produit5);
+		produit.add(produit6);
+		produit.add(produit7);
+		produit.add(produit8);
+		produit.add(produit9);
+
+	}
      
 	public int getId() {
 		return id;
@@ -129,7 +152,7 @@ public class Product {
      * 
      */
     public Product () {
-    	
+    	adding_initiale_product_in_product_list();
     };
 
     
@@ -138,8 +161,12 @@ public class Product {
 	/**
 	 * @param product
 	 */
+	public void add(Product product){
+		product_list.put(product.id,product);
+	}
 	public void addProduct(Product product) {
 		do{
+			adding_initiale_product_in_product_list();
 			product=new Product(insertid(),insertfullname(),insertprice(),insertcategory());
 			if(product_list.containsKey(product.id)==false){
 				product_list.put(product.id,product);
@@ -162,6 +189,7 @@ public class Product {
 	public void showProductadmin(){
 		System.out.println("Voici la liste des produits déjà enregistrés dans notre restaurant");
 		Enumeration<Product> el;
+		adding_initiale_product_in_product_list();
 		if(product_list.size()>0){
 			el=product_list.elements();
 			System.out.println("id( nom_produit , prix_produit , catégorie_produit )");
@@ -180,6 +208,7 @@ public class Product {
 
 	public void showProductclient(){
 		System.out.println("Voici la liste des produits");
+		adding_initiale_product_in_product_list();
 		Enumeration<Product> el;
 		if(product_list.size()>0){
 			el=product_list.elements();

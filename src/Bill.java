@@ -4,14 +4,9 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Bill{
-<<<<<<< HEAD
 
 	Product product=new Product();
 
-=======
-	
-	//création d'une instance 'kbd' de la classe Scanner
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 	static Scanner kbd = new Scanner(System.in);
 	
 //	Déclaration de trois tableaux dynamique de type ArrayList
@@ -62,12 +57,8 @@ public class Bill{
 		
 //		Appel de la fonction 'showProduits' contenant la liste des produits(plats) proposés par le restaurant
 		
-<<<<<<< HEAD
 		System.out.println("------------Liste des produits--------------");
-		product.showProduct();
-=======
-		Produit.showProduits();
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
+		product.showProductclient();
 		
 //		Déclaration des variables nécessaires à l'éxécution de la méthode
 //			b qui prendra vrai comme valeur lorsque le client saisi un produit(plat) ne figurant pas dans la liste faux dans le cas contraire
@@ -84,16 +75,8 @@ public class Bill{
 			
 			System.out.print("\nVotre Commande ici : \n");
 			commandeClient = kbd.next();
-<<<<<<< HEAD
 			for (Product produit : product.product_list.values()) {
 				if(!produit.getName().equalsIgnoreCase(commandeClient)) {
-=======
-			
-//			Verification si la commande du client figure bien dans la liste
-			
-			for (Produit produit : Produit.listeProduit) {
-				if(!produit.nom.equalsIgnoreCase(commandeClient)) {
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 					b=true;
 				}
 				else {
@@ -105,22 +88,13 @@ public class Bill{
 			}
 			
 			if(b) {
-<<<<<<< HEAD
 				System.out.println("Le produit saisi ne figure pas parmi ceux affich�s ci-dessus.");
 				System.out.println("Veuillez saisir un produit qui figure parmi ces derniers.");
-=======
-				System.out.println("\nLe produit saisi ne figure pas parmi ceux affichés ci-dessus.");
-				System.out.println("\nVeuillez saisir un produit qui figure parmi ces derniers.");
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 			}
 			
 		}while(b);
 		
-<<<<<<< HEAD
 		System.out.print("Entrez la quantit� : ");
-=======
-		System.out.print("\nEntrez La Quantité : ");
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 		quantiteCommande = kbd.nextInt();
 		System.out.println("\nVeuillez patientez!!\nVotre commande arrive bientot.");
 		

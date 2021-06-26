@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "workbench.editor.enablePreview": false,
+    "terminal.integrated.detectLocale": "off",
+    "files.autoGuessEncoding": true,
+    "editor.renderControlCharacters": true
+}
