@@ -134,8 +134,6 @@ public class Product {
 
     
     
-    
-    
     // add Product
 	/**
 	 * @param product
@@ -191,7 +189,7 @@ public class Product {
 				System.out.println(((Product)el.nextElement()).identify_productclient());
 			
 		}
-		else System.out.println("Pas des produits (nourritures et boissons) disponible ");
+		else System.out.println("desole on a rien (nourritures et boissons) de disponible ");
 	}
 	public String identify_productclient(){
 		return this.name+"( "+this.price+" , "+this.getCategory()+" ) .";
