@@ -12,7 +12,7 @@ public class Test {
 
 		// add new Produit pour admin panel//
 
-		Produit produit = new Produit();
+		Product produit = new Product();
 		//------------------------------------------------------------------------
 		//Cote Produit @pegasus03 saissir les Produits avec clavier 
 		
@@ -22,13 +22,13 @@ public class Test {
 		 "),Donnees.Saisie_Caracteres("-Saissir La Categorie De La Produit : ")));*/
 		//-------------------------------------------------------------------------
 		
-		produit.ajouterP(new Produit(1, "Smoothie", 1200, "Boisson"));
-		produit.ajouterP(new Produit(2, "Pizza", 12000, "Norriture"));
-		produit.ajouterP(new Produit(3, "Fanta", 800, "Boisson"));
-		produit.ajouterP(new Produit(4, "Burger", 10000, "Norriture"));
-		produit.ajouterP(new Produit(5, "Umucopo", 1000, "Norriture"));
-		produit.ajouterP(new Produit(6, "Capati", 500, "Norriture"));
-		produit.ajouterP(new Produit(7, "Eau", 100, "Boisson"));
+		produit.add(new Product(1, "Smoothie", 1200, "Boisson"));
+		produit.ajouterP(new Product(2, "Pizza", 12000, "Norriture"));
+		produit.ajouterP(new Product(3, "Fanta", 800, "Boisson"));
+		produit.ajouterP(new Product(4, "Burger", 10000, "Norriture"));
+		produit.ajouterP(new Product(5, "Umucopo", 1000, "Norriture"));
+		produit.ajouterP(new Product(6, "Capati", 500, "Norriture"));
+		produit.ajouterP(new Product(7, "Eau", 100, "Boisson"));
 
 		Bill bill = new Bill();
 		
@@ -40,27 +40,17 @@ public class Test {
 		do {
 
 			do {
-<<<<<<< HEAD
 				System.out.println("1. Faire une commande\n2. Voir les produits command�s\n3. Quitter");
 				reponse = kbd.nextInt();
 			}while(reponse > 3);
 		
 			if(reponse == 1) {
-=======
-
-				System.out.println("1. Faire Une Commande\n2. Voir Les Produits Commandés\n3. Quitter");
-				reponse = Donnees.Saissir_Entier("\nChoisir L'index Ci en Haut Pour Continuer\n");
-			} while (reponse > 3);
-
-			if (reponse == 1) {
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 				bill.commande();
 			} else if (reponse == 2) {
 
 					bill.AfficherFacture();
 
 			}
-<<<<<<< HEAD
 			else if(reponse == 2) {
 				Iterator<String> tabCle = bill.getCommandesQuantite().keySet().iterator();
 				System.out.println("------------Produits command�s-------------");
@@ -79,11 +69,6 @@ public class Test {
 			
 		}while(reponse < 3);
 		
-=======
-
-		} while (reponse < 3);
-
->>>>>>> d2d37d84b5a1ac91bf17563f02709e6cf4ef9572
 	}
 
 }
