@@ -1,6 +1,8 @@
 package src;
 
+
 import java.util.Scanner;
+
 
 public class App 
 {
@@ -8,6 +10,10 @@ public class App
     {
         Scanner ss = new Scanner(System.in);
         int continuer = 0;
+        // instance de la classe Product pour les operations de bas
+        Product pr = new Product();
+        //ajouter une liste des produits initiales.
+        pr.adding_initiale_product_in_product_list();
         do {
             System.out.println("==============================================================");
             System.out.println("=========                                            =========");
@@ -30,10 +36,9 @@ public class App
             
             int choice = 0;
             do {
-                Scanner sc = new Scanner(System.in);
                 System.out.print(m1);
                 System.out.print(">>> ");
-                choice = sc.nextInt();
+                choice = exception.writeint(choice);
                 switch (choice) {
                     case 1:
                         System.out.println(m1);
@@ -41,8 +46,7 @@ public class App
                         System.out.println("=================");
                         // String client_second_word = "je choisi ";
                         // la classe pour avoir les produits
-                        Product produit = new Product();
-                        produit.showProductclient();
+                        pr.showProductclient();
                         // System.out.println("1. "+client_second_word+" Fresh Cow Meat");
                         // System.out.println("2. "+client_second_word+" Akabenze");
                         // System.out.println("3. "+client_second_word+" Beshu");
@@ -56,6 +60,7 @@ public class App
                         break;
                     case 1172:
                         int cx = 0;
+                        
                         do{
                             System.out.println(m1);
                             System.out.println("1. ajouter un produit");
@@ -66,19 +71,15 @@ public class App
                             System.out.println("6. generer une facture a partir des commandes");
                             System.out.println(m1);
                             // Scanner ss = new Scanner(System.in);
-                            int chx = ss.nextInt();
-
-                            // instance de la classe Product pour les operations de base
-                            Product pr = new Product();
+                            System.out.print("=>");
+                            int chx=0;
+                            chx = exception.writeint(chx);
                             switch (chx) {
                                 
                                 case 1:
                                     // recuperation des donnee
-                                    pr.setName(pr.insertfullname());
-                                    pr.setCategory(pr.insertcategory());
-                                    pr.setPrice(pr.insertprice());
-                                    pr.setId(pr.insertid());
                                     // creation du nouveau produit
+                                    
                                     pr.addProduct(pr);
                                     pr.showProductadmin();
                                     break;
@@ -87,17 +88,18 @@ public class App
                                     break;
                                 case 3:
                                     pr.deleteProduct();
+                                    pr.showProductadmin();
                                     break;
                                 case 4:
-                                    pr.deleteProduct();
-                                    break;
+                                    pr.updateProduct();
+                                    pr.showProductadmin();
                                 case 5:
                                     break;
                                 case 6:
                                     break;
                             }
                             System.out.println("vous voulez continuez a travaillez en tant que admin (1 => oui, 0 => non)");
-                            cx = ss.nextInt();
+                            cx=exception.writeint(cx);
                         } while(cx == 1);
                         
                         break;
@@ -109,8 +111,7 @@ public class App
                 }
             } while(choice != 1 && choice != 2 && choice != 1172);
             System.out.print("vous voulez un peu de nos services (1 = oui, 0 = non) >>>...");
-            Scanner sc = new Scanner(System.in);
-            continuer = sc.nextInt();
+            continuer = exception.writeint(continuer);
         } while(continuer == 1);
         System.out.print("\n");
         System.out.print("Bye!, revenez bientot😘");

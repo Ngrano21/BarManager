@@ -17,35 +17,24 @@ public class Product {
      private String category;
      
      public Hashtable<Integer, Product> product_list = new  Hashtable<Integer,Product>();
-     
+	 
     public static void error_notifer() {
         System.out.println("Cher Administrateur, Desolé vous avez mal saisi, Veuillez bien saisir!");
     }
     public static void success_notifer() {
     	 System.out.println("Cher Administrateur,Félicitation, vous avez bien saisi !");
     }
-	public static void adding_initiale_product_in_product_list(){
-		Product produit = new Product(1,"Pizza",15000,"Nourriture");
-		Product produit1 = new Product(2,"Jus d'orange",1000,"Boisson");
-		Product produit2 = new Product(3,"Lait frais",1200,"Boisson");
-		Product produit3 = new Product(4,"Hamburger",15000,"Nourriture");
-		Product produit4 = new Product(5,"Kebab",4000,"Nourriture");
-		Product produit5 = new Product(6,"Primus",1500,"Boisson");
-		Product produit6 = new Product(7,"Capati",500,"Nourriture");
-		Product produit8 = new Product(8,"Omolette",2000,"Nourriture");
-		Product produit9 = new Product(9,"Café",2500,"Boisson");
-		Product produit7 = new Product(10,"Champagne",25000,"Boisson");
-		produit.add(produit2);
-		produit.add(produit1);
-		produit.add(produit);
-		produit.add(produit3);
-		produit.add(produit4);
-		produit.add(produit5);
-		produit.add(produit6);
-		produit.add(produit7);
-		produit.add(produit8);
-		produit.add(produit9);
-
+	public void adding_initiale_product_in_product_list(){
+		product_list.put(1,new Product(1,"Pizza",15000,"Nourriture")); 
+		product_list.put(2, new Product(2,"Jus d'orange",1000,"Boisson"));
+		product_list.put(3, new Product(3,"Lait frais",1200,"Boisson"));
+		product_list.put(4, new Product(4,"Hamburger",15000,"Nourriture"));
+		product_list.put(5,new Product(5,"Kebab",4000,"Nourriture"));
+		product_list.put(6,new Product(6,"Primus",1500,"Boisson"));
+		product_list.put(7,new Product(7,"Capati",500,"Nourriture"));
+		product_list.put(8, new Product(8,"Omolette",2000,"Nourriture"));
+		product_list.put(9,new Product(9,"Café",2500,"Boisson"));
+		product_list.put(10,new Product(10,"Champagne",25000,"Boisson"));
 	}
      
 	public int getId() {
@@ -152,21 +141,14 @@ public class Product {
      * 
      */
     public Product () {
-    	adding_initiale_product_in_product_list();
+		
     };
 
     
-    
-    // add Product
-	/**
-	 * @param product
-	 */
-	public void add(Product product){
-		product_list.put(product.id,product);
-	}
+
+	
 	public void addProduct(Product product) {
 		do{
-			adding_initiale_product_in_product_list();
 			product=new Product(insertid(),insertfullname(),insertprice(),insertcategory());
 			if(product_list.containsKey(product.id)==false){
 				product_list.put(product.id,product);
@@ -187,9 +169,8 @@ public class Product {
 	
     // show Product
 	public void showProductadmin(){
-		System.out.println("Voici la liste des produits déjà enregistrés dans notre restaurant");
+		System.out.println("\n\nVoici la liste des produits déjà enregistrés dans notre restaurant");
 		Enumeration<Product> el;
-		adding_initiale_product_in_product_list();
 		if(product_list.size()>0){
 			el=product_list.elements();
 			System.out.println("id( nom_produit , prix_produit , catégorie_produit )");
@@ -208,7 +189,6 @@ public class Product {
 
 	public void showProductclient(){
 		System.out.println("Voici la liste des produits");
-		adding_initiale_product_in_product_list();
 		Enumeration<Product> el;
 		if(product_list.size()>0){
 			el=product_list.elements();
@@ -237,37 +217,48 @@ public class Product {
 	
 	//delete Product
 	public void deleteProduct() {
-		
-		if(product_list.size()>0) {
-			
-			System.out.println("Veuillez sélectionner suivant l'id du produit à effacer contenant dans notre liste des produits! :");
+
+		if(product_list.size()>0) 
+		{
+			System.out.println("\n\nVeuillez sélectionner suivant l'id du produit à effacer contenant dans notre liste des produits! :");
 		    showProductadmin();
 		    System.out.println("\n");
 		    System.out.print("Veuillez saisir l'id du produit à effacer : ");
 		    int id_delete=0;
 		    id_delete=0;
 			id_delete=exception.writeint(id_delete);
-		    
-		    System.out.println("Etez-vous sûr de supprimer cette produit !");
-		    System.out.println("0. Pour Annuler / 1. Pour Confirmer");
-		    int a = 0;
-	    	a=exception.writeint(a);
-			do {
-	    		if(a==0) {
-	    			System.out.println("Merci! l'elément choisie est sauvée")
-	    			;break;
-	    		}
-	    		else if(a==1) {
-		    				product_list.remove(id_delete);
-			    			System.out.println("Votre démandée de supprimer un produit dans notre restaurant est executée avec succèes cher Administrateur");		
-			    			break;
-	    		}
-	    		else {
-	    			error_notifer();
-	    			break;
-	    		}
-	    	}while(a!=1||a!=0);}
-			
+
+			do{
+				if(product_list.containsKey(id_delete)==true){
+							    
+					System.out.println("Etez-vous sûr de supprimer cette produit !");
+					System.out.println("0. Pour Annuler / 1. Pour Confirmer");
+					int a = 0;
+					a=exception.writeint(a);
+					do {
+						if(a==0) {
+							System.out.println("Merci! l'elément choisie est sauvée")
+							;break;
+						}
+						else if(a==1) {
+									product_list.remove(id_delete);
+									System.out.println("Votre démandée de supprimer un produit dans notre restaurant est executée avec succèes cher Administrateur");		
+									break;
+						}
+						else {
+							error_notifer();
+							break;
+						}
+					}while(a!=1||a!=0);
+				}
+				else{
+					System.out.println("\n\nL'id saisie pour sa suppression ne correspondent pas dans notre produit restaurant!");
+					System.out.println("Veuillez réessayez encore Cher Administrateur avec id correct!\n");
+					break;
+				}
+	
+			}while(product_list.containsKey(id_delete)==false);
+		}
 		else System.out.println("Pas des produits (nourritures et boissons) à effacer");
 	    
 	}
@@ -283,32 +274,42 @@ public class Product {
 	public void updateProduct() {
 		
 		if(product_list.size()>0) {
-			
-			System.out.println("Veuillez sélectionner suivant l'id du produit à modifier contenant dans notre liste des produits!\"");
+			System.out.println("\n\nVeuillez sélectionner suivant l'id du produit à modifier contenant dans notre liste des produits!\"");
 		    showProductadmin();
 		    System.out.println("\n");
 		    System.out.print("Veuillez saisir l'id du produit à modifier :");
 		    int id_update=0;
 		    id_update=exception.writeint(id_update);
-		    
-		    System.out.println("Etez-vous sûr de modifier cette produit !");
-		    System.out.println("0. Pour Annuler / 1. Pour Confirmer");
-		    int a = 0;
-	    	a=exception.writeint(a);
-			do {
-	    		if(a==0) {
-	    			System.out.println(" Merci! l'elément  est reste comme auparavant");
-	    		}
-	    		else if(a==1) {
-	  
-		    				product_list.get(id_update).setPrice(insertprice());	
-		    				System.out.println("Votre démandée de modifier un produit dans notre restaurant est executée avec succèes cher Administrateur");
-	    				    break;
-	    		}
-	    		else {
-	    			error_notifer();
-	    		}
-	    	}while(a!=1 || a!=0);}
+		    do{
+				if(product_list.containsKey(id_update)==true)
+				{
+					System.out.println("Etez-vous sûr de modifier cette produit !");
+					System.out.println("0. Pour Annuler / 1. Pour Confirmer");
+					int a = 0;
+					a=exception.writeint(a);
+					do {
+						if(a==0) {
+							System.out.println(" Merci! l'elément  est reste comme auparavant");
+						}
+						else if(a==1) {
+			
+									product_list.get(id_update).setPrice(insertprice());	
+									System.out.println("Votre démandée de modifier un produit dans notre restaurant est executée avec succèes cher Administrateur");
+									break;
+						}
+						else {
+							error_notifer();
+						}
+					}while(a!=1 || a!=0);
+				}
+				else{
+					System.out.println("\n\nL'id saisie pour sa modification ne correspondent pas dans notre produit restaurant!");
+					System.out.println("Veuillez réessayez encore Cher Administrateur avec id correct!\n");
+					break;
+				}
+
+			}while(product_list.containsKey(id_update)==false);
+		}
 			
 		else System.out.println("Pas des produits (nourritures et boissons) à mofifier");
 	    
