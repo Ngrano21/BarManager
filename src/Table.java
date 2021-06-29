@@ -1,11 +1,12 @@
-package src;
+
+
 import java.io.File;
-//import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-//import java.util.List;
 import java.io.PrintWriter;
 
 
@@ -14,9 +15,9 @@ public class Table
     private int tableId;
     private static int nbrTable = 25; 
     private static int reservation[] = new int[nbrTable];
-    private static File temp = null;
-    private FileWriter obj = null;
-    private static PrintWriter wr = null;
+    private File temp = null;
+     private FileWriter obj = null;
+     private PrintWriter wr = null;
     
     /* --- CONSTRUCTOR --- **/
 
@@ -31,18 +32,21 @@ public class Table
 
             // --- Table number verification
 
-            if(getTableId() < 25)
+            if(getTableId() < nbrTable)
             {
 
                 // --- Enter table number verification
 
                 if(reservation[num] == 0)
                 {
-                    setOccupied(num);
+                    setTableId(num);
+                    setOccupied(getTableId());
+                    System.out.println("\nLa table "+getTableId()+" est maintenant prise.");
+                    
                     //File temp = null;
                     createTempBillFile();
-                    obj = new FileWriter(temp.getAbsolutePath());
-                    wr = new PrintWriter(obj);
+                    this.obj = new FileWriter(this.temp.getAbsolutePath());
+                    this.wr = new PrintWriter(this.obj);
                     nbrTable--; //décrementation du nombre de table dispo
                 }
                 else
@@ -77,10 +81,10 @@ public class Table
     }
 
                          
-                         /** 
-                          * @return int
-                          */
-                         /* --- GETERS --- */
+     /** 
+      * @return int
+      */
+     /* --- GETERS --- */
 
     public int getTableId()
     {
@@ -91,10 +95,15 @@ public class Table
     {
         return reservation[t];
     }
+
+    public static int getNbrTable()
+    {
+        return nbrTable;
+    }
  
  /** 
   * @param t
- * @throws IOException
+  * @throws IOException
   */
  /*------------------------------------------------------------------------------------------------------------------------------------------------ */
                          /* ---Method --- */
@@ -108,14 +117,14 @@ public class Table
             
             
                try {
-                temp = File.createTempFile("temp", null, new File("P:/projet et cours/programation/Java/projets/School/Exam Project/src/temp"));
+                this.temp = File.createTempFile("temp", null, new File("temp"));
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-               if(temp.exists())
+               if(this.temp.exists())
                {
-                   System.out.println("\nFile created :" + temp.getAbsolutePath());
+                   //System.out.println("\nFile created :" + this.temp.getAbsolutePath());
                }
                else
                {
@@ -138,10 +147,9 @@ public class Table
         
 
             
-                 //FileWriter obj = new FileWriter(temp.getAbsolutePath());
-                 //PrintWriter wr = new PrintWriter(obj);
-                 wr.printf("%s %d %d %d \n", nameP, prixU, quantity, prixU *quantity);
-                 //wr.close();
+                  wr.printf("%s %d %d %d \n", nameP, prixU, quantity, prixU *quantity);
+                  wr.flush();
+                  //wr.close();
                  System.out.println("\nLe fiechier a bien ete closed");
 
     }
@@ -152,38 +160,50 @@ public class Table
      */
     /* --- Temp File suppression --- */
 
-    public static void deleteTempBillFile()
+    public Boolean deleteTempBillFile()
     {
-        if(temp.delete())
+        if(this.temp.delete())
         {
-
+            //System.out.println("\nTemp file deleted !");
+            return true;
         }
         else
         {
-            System.out.println("\nErreur de supression");
+           // System.out.println("\nErreur de supression");
+            return false;
         }
     }
 
-    
+
     /** 
      * @param t
      * @param tr
+     * @throws InterruptedException
      * @throws FileNotFoundException
+     * @ShowConsomation print Actual cosomation and total
      */
-    /* --- Bill generator(Temp File reader) --- */
+    
+    /* --- cosomation check(Temp File reader) --- */
 
-    public static void billGenerator( int tr) throws InputMismatchException
+    public void ShowConsomation() throws InputMismatchException, InterruptedException
     {
+
         int total = 0,totalBill = 0;
-        wr.close();
         try
         {
-          Scanner bg = new Scanner(temp);
-
+          Scanner bg = new Scanner(this.temp);
+          System.out.println("\nLa consommation actuel a la table "+getTableId()+ " est de :");
           while(bg.hasNext())
           {
-             System.out.print("\n"+ bg.next());
-             System.out.print(" : "+ bg.nextInt() +"FBU");
+             App.latence(160);
+             System.out.print("\n... "+ bg.next());
+             if(bg.hasNextInt())
+                   System.out.print(" : "+ bg.nextInt() +"FBU");
+             else
+             {
+                System.out.print(" "+ bg.next());
+                System.out.print(" : "+ bg.nextInt() +"FBU");
+             }
              System.out.print(" *"+ bg.nextInt() + " : ");
              total = bg.nextInt();
              System.out.print(total +"FBU");
@@ -191,8 +211,53 @@ public class Table
              
 
           }
-          
-          System.out.println("\n\t Total : "+ totalBill +"FBU");
+          App.latence(75);
+          System.out.println("\n\t Total Actuel : "+ totalBill +"FBU");
+          bg.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Erruer!");
+            e.printStackTrace();
+        }
+    }
+
+    
+    /** 
+     * @throws InterruptedException
+     * @throws FileNotFoundException
+     * @billGenerator print Table consomation and close temp file and set the table free
+     */
+    /* --- Bill generator(Temp File reader) --- */
+
+    public  void billGenerator() throws InputMismatchException, InterruptedException
+    {
+        int total = 0,totalBill = 0;
+        wr.close();
+        try
+        {
+          Scanner bg = new Scanner(this.temp);
+          System.out.println("\nTable "+ getTableId() +" votre Facture est de :");
+          while(bg.hasNext())
+          {
+            App.latence(160);
+             System.out.print("\n... "+ bg.next());
+             if(bg.hasNextInt())
+                   System.out.print(" : "+ bg.nextInt() +"FBU");
+             else
+             {
+                System.out.print(" "+ bg.next());
+                System.out.print(" : "+ bg.nextInt() +"FBU");
+             }
+             System.out.print(" *"+ bg.nextInt() + " : ");
+             total = bg.nextInt();
+             System.out.print(total +"FBU");
+             totalBill += total;
+             
+
+          }
+          App.latence(75);
+          System.out.println("\n\t Facture : "+ totalBill +"FBU");
           bg.close();
         }
         catch(IOException e)
@@ -201,15 +266,15 @@ public class Table
             e.printStackTrace();
         }
         
-        deleteTempBillFile();
-        if(temp == null)
+        if(this.deleteTempBillFile())
         {
-          setFree(tr);
+          setFree(getTableId());
           nbrTable++;
         }
         else
           System.out.println("\nErreur de suppression \na la facturation.");
     }
+
 
     /* --- Set all table free (initialize to null) --- */
 

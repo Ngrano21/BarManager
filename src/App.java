@@ -1,120 +1,208 @@
-package src;
 
-
+import java.io.IOException;
+import java.lang.Thread;
 import java.util.Scanner;
 
+import javax.lang.model.util.ElementScanner14;
+
+import java.util.ArrayList;
 
 public class App 
 {
-    public static void main(String[] args) 
+   public final static void ClearConsole()
+   {
+      System.out.print("\033[H\033[2J");  
+      System.out.flush(); 
+   }
+     
+    public final static void latence(int t) throws InterruptedException
     {
-        Scanner ss = new Scanner(System.in);
-        int continuer = 0;
-        // instance de la classe Product pour les operations de bas
-        Product pr = new Product();
-        //ajouter une liste des produits initiales.
-        pr.adding_initiale_product_in_product_list();
-        do {
+       Thread.sleep(t);
+    }
+    public static void main(String[] args) throws IOException, InterruptedException
+    {
+      ArrayList<Table> reserv = new ArrayList<Table>();
+      int choice = -1;
+      Table.setAllFree();
+      
+
             System.out.println("==============================================================");
             System.out.println("=========                                            =========");
-            System.out.println("====       🍺🍗BIENVENUE DANS NOTRE RESTAURANT🍖🍻        ====");
+            System.out.println("====       BIENVENUE DANS NOTRE RESTAURANT                ====");
             System.out.println("=========                                            =========");
             System.out.println("==============================================================");
 
+            System.out.print("\n\n\t\t  Loading");
+            for(int i = 0; i < 5; i++)
+            {
+               latence(545);
+               System.out.print(" .");
+            }
+
             
-            // ====> client
-            // helper variables and functions
-            String m2 = "\n\n";
-            String m1 = "\n";
+
+      do
+      {
+         ClearConsole();
+          int option = -1;
+          latence(200);
+          System.out.println("0. Fermer le programme. ");
+          latence(200);
+          System.out.println("1. Reserver une table. ");
+          latence(200);
+          System.out.println("2. Voir le Menu.  ");
+          latence(200);
+          System.out.println("3. Passer une commande. ");
+          latence(200);
+          System.out.println("4. Voir la consommation. ");
+          latence(200);
+          System.out.println("5. Facture. ");
+          latence(70);
+          System.out.print(":: >>> ");
+          option = Saisir.Saissir_Entier();
+          switch(option)
+          {
+              case 0:
+                 System.exit(0);
+                 break;
+              case 1:
+                 ClearConsole();
+                 int id;
+                 do{
+                 System.out.print("\nNumero de la table ? >>> ");
+                 id = Saisir.Saissir_Entier();
+                 }while(id >= Table.getNbrTable());
+                 if(Table.getTableState(id) == 0)
+                     reserv.add(new Table(id));
+                  else
+                    System.out.println("\nTable occupe!");
+                 break;
+              case 2 :
+                 ClearConsole();
+                 System.out.print("\nShow Menu !");
+                 Product.showProductclient();
+                 break;
+              case 3 :
+                 ClearConsole();
+                 int refaire = -1;
+                 do
+                 {
+                    int idt,qt,com;
+                    int idx = -1;
+                    Product.showProductclient();
+                    
+                    do
+                    {
+                     System.out.print("\nEntrez le numero de la table >>> ");
+                       idt = Saisir.Saissir_Entier();
+                       for( int i = 0; i < reserv.size(); i++)
+                       {
+                          if(reserv.get(i).getTableId() == idt)
+                          {
+                             idx = i;
+                             break;
+                          }
+                       }
+                    }while(idx >= reserv.size());
+                    if(idx == -1)
+                    {
+                        System.out.println("\nCette Table n'as pas de client");
+                    }
+                    else
+                    {
+                        System.out.print("\nEntrez le numero du Produit >>> ");
+                      do
+                      {
+                         com = Saisir.Saissir_Entier();
+                      }while(com < 0);
+
+                        System.out.print("\nEntrez la quantite >>> ");
+                      do
+                      {
+                        qt = Saisir.Saissir_Entier();
+                      }while(qt < 1);
+                        reserv.get(idx).writeTempBillFile(Product.commande(com).getName(), Product.commande(com).getPrice(), qt);
+                    }
+                    System.out.print("\n1. Pour refaire une commande.\n0. Pour arreter de commander.\n>>> ");
+                    refaire = Saisir.Saissir_Entier();
+                    
+                 }while(refaire != 0);
+                 break;
+              case 4 :
+                 ClearConsole();
+                 int revoir = -1;
+                 do
+                 {
+                    int revoir_idt,revoir_idx = -1;
+                    System.out.print("Entrez le numero de la table >>> ");
+                    do
+                    {
+                       revoir_idt = Saisir.Saissir_Entier() ;
+                       for( int i = 0; i < reserv.size(); i++)
+                       {
+                          if(reserv.get(i).getTableId() == revoir_idt)
+                          {
+                             revoir_idx = i;
+                             break;
+                          }
+                        }
+                    }while(revoir_idx >= reserv.size());
+
+                    if(revoir_idx == -1)
+                       System.out.println("\nCette Table n'as pas de client");
+                    else
+                    {
+                      reserv.get(revoir_idx).ShowConsomation();
+                    }
+                    System.out.print("\n1. Pour revoir la consommation.\n0. Pour arreter.\n>>> ");
+                    revoir = Saisir.Saissir_Entier();
+                    
+                 }while(revoir != 0);
+                 break;
+              case 5 :
+                ClearConsole();
+                int re_bill = -1;
+                do
+                {
+                 int bill_idt,bill_idx = -1;
+                 System.out.print("Entrez le numero de la table >>> ");
+                 do
+                 {
+                    bill_idt = Saisir.Saissir_Entier();
+                    for( int i = 0; i < reserv.size(); i++)
+                    {
+                       if(reserv.get(i).getTableId() == bill_idt)
+                       {
+                          bill_idx = i;
+                          break;
+                       }
+                     }
+                 }while(bill_idx >= reserv.size());
+                 if(bill_idx == -1)
+                      System.out.println("\nCette Table n'as pas de client");
+                 else
+                 {
+                    reserv.get(bill_idx).billGenerator();
+                    reserv.remove(bill_idx);
+                 }
+                 System.out.print("\n1. Pour refaire une commande.\n0. Pour arreter de commander.\n>>> ");
+                 re_bill = Saisir.Saissir_Entier();
+                 
+                }while(re_bill != 0);
+              default :
+                System.out.print("\nCette option n'existe pas, choisissez en une aurtes !");
+          }
+          
+          System.out.print("\n\n--------------------------------------------");
+          System.out.print("\n0. Pour arreter le programme\n1. Pour continuer\n>>> ");
+          choice = Saisir.Saissir_Entier();
+
+      }while(choice != 0);
+
+
             
-            // pour acceder a l'administration on va utiliser le nombre 1172
-            System.out.println(m2);
-            String client_first_word = "je veux ";
-            System.out.println("Que peut-on faire pour toi?");
-            System.out.println("1. "+client_first_word+"voir le menu");
-            System.out.println("2. "+client_first_word+"quitter le resto");
-            
-            int choice = 0;
-            do {
-                System.out.print(m1);
-                System.out.print(">>> ");
-                choice = exception.writeint(choice);
-                switch (choice) {
-                    case 1:
-                        System.out.println(m1);
-                        System.out.println("Voila notre menu!");
-                        System.out.println("=================");
-                        // String client_second_word = "je choisi ";
-                        // la classe pour avoir les produits
-                        pr.showProductclient();
-                        // System.out.println("1. "+client_second_word+" Fresh Cow Meat");
-                        // System.out.println("2. "+client_second_word+" Akabenze");
-                        // System.out.println("3. "+client_second_word+" Beshu");
-                        // System.out.println("4. "+client_second_word+" Urwarwa");
-                        System.out.println(m1);
-                        break;
-                    case 2:
-                        System.out.println(m1);
-                        System.out.println("OK, merci pour votre visite...");
-                        System.out.println(m1);
-                        break;
-                    case 1172:
-                        int cx = 0;
-                        
-                        do{
-                            System.out.println(m1);
-                            System.out.println("1. ajouter un produit");
-                            System.out.println("2. voir tous les produits");
-                            System.out.println("3. suprimmer un produit");
-                            System.out.println("4. mettre a jour un produit");
-                            System.out.println("5. voir tout les commandes");
-                            System.out.println("6. generer une facture a partir des commandes");
-                            System.out.println(m1);
-                            // Scanner ss = new Scanner(System.in);
-                            System.out.print("=>");
-                            int chx=0;
-                            chx = exception.writeint(chx);
-                            switch (chx) {
-                                
-                                case 1:
-                                    // recuperation des donnee
-                                    // creation du nouveau produit
-                                    
-                                    pr.addProduct(pr);
-                                    pr.showProductadmin();
-                                    break;
-                                case 2:
-                                    pr.showProductadmin();
-                                    break;
-                                case 3:
-                                    pr.deleteProduct();
-                                    pr.showProductadmin();
-                                    break;
-                                case 4:
-                                    pr.updateProduct();
-                                    pr.showProductadmin();
-                                case 5:
-                                    break;
-                                case 6:
-                                    break;
-                            }
-                            System.out.println("vous voulez continuez a travaillez en tant que admin (1 => oui, 0 => non)");
-                            cx=exception.writeint(cx);
-                        } while(cx == 1);
-                        
-                        break;
-                    default:
-                        System.out.println(m1);
-                        System.out.println("Je ne comprends pas (0_0)");
-                        System.out.println(m1);
-                        break;
-                }
-            } while(choice != 1 && choice != 2 && choice != 1172);
-            System.out.print("vous voulez un peu de nos services (1 = oui, 0 = non) >>>...");
-            continuer = exception.writeint(continuer);
-        } while(continuer == 1);
-        System.out.print("\n");
-        System.out.print("Bye!, revenez bientot😘");
-        ss.close();
-    }
+
+
+}
+
 }
