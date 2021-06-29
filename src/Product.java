@@ -1,7 +1,7 @@
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 
 /**
@@ -23,16 +23,16 @@ public class Product {
     	 System.out.println("Cher Administrateur,Félicitation, vous avez bien saisi !");
     }
 	public static void adding_initiale_product_in_product_list(){
-		Product produit = new Product(1,"Pizza",15000,"Nourriture");
-		Product produit1 = new Product(2,"Jus d'orange",1000,"Boisson");
-		Product produit2 = new Product(3,"Lait frais",1200,"Boisson");
-		Product produit3 = new Product(4,"Hamburger",15000,"Nourriture");
-		Product produit4 = new Product(5,"Kebab",4000,"Nourriture");
-		Product produit5 = new Product(6,"Primus",1500,"Boisson");
-		Product produit6 = new Product(7,"Capati",500,"Nourriture");
-		Product produit8 = new Product(8,"Omolette",2000,"Nourriture");
-		Product produit9 = new Product(9,"Cafe",2500,"Boisson");
-		Product produit7 = new Product(10,"Champagne",25000,"Boisson");
+		Product produit = new Product(1,"Pizza 🍕",15000,"Nourriture");
+		Product produit1 = new Product(2,"Hamburger 🍔",15000,"Nourriture");
+		Product produit2 = new Product(3,"Frites 🍟",2000,"Nourriture");
+		Product produit3 = new Product(4,"Pain 🍞",500,"Nourriture");
+		Product produit4 = new Product(5,"Cookie 🍪",4000,"Nourriture");
+		Product produit5 = new Product(6,"Primus 🍺",1500,"Boisson");
+		Product produit6 = new Product(7,"Jus de pomme 🧃",1000,"Boisson");
+		Product produit8 = new Product(8,"Cafe ☕",2500,"Boisson");
+		Product produit9 = new Product(9,"Lait frais 🥛",1200,"Boisson");
+		Product produit7 = new Product(10,"Champagne 🍾",25000,"Boisson");
 		produit.add(produit2);
 		produit.add(produit1);
 		produit.add(produit);
@@ -92,11 +92,6 @@ public class Product {
 		return price;
     }
     
-    
-    
-    
-    
-    
     /**
      * @return
      */
@@ -122,8 +117,6 @@ public class Product {
     		}
     	}while(a!=1 || a!=2);
 		return category;
-		
-        
     }
     
   
@@ -221,7 +214,7 @@ public class Product {
 		else System.out.println("desole on a rien (nourritures et boissons) de disponible ");
 	}
 	public String identify_productclient(){
-		return this.id+". "+ this.name+"( "+this.price+" , "+this.getCategory()+" ) .";
+		return this.id+". "+ this.name+" ( "+this.price+" , "+this.getCategory()+" )";
 	}
 
 	

@@ -1,9 +1,9 @@
 
 import java.io.IOException;
 import java.lang.Thread;
-import java.util.Scanner;
+//import java.util.Scanner;
 
-import javax.lang.model.util.ElementScanner14;
+//import javax.lang.model.util.ElementScanner14;
 
 import java.util.ArrayList;
 
@@ -24,42 +24,81 @@ public class App
       ArrayList<Table> reserv = new ArrayList<Table>();
       int choice = -1;
       Table.setAllFree();
-      
-
-            System.out.println("==============================================================");
-            System.out.println("=========                                            =========");
-            System.out.println("====       BIENVENUE DANS NOTRE RESTAURANT                ====");
-            System.out.println("=========                                            =========");
-            System.out.println("==============================================================");
-
-            System.out.print("\n\n\t\t  Loading");
-            for(int i = 0; i < 5; i++)
+            String[] name = new String[10];
+            name[0] = "O";
+            name[1] = "T";
+            name[2] = "A";
+            name[3] = "K";
+            name[4] = "U";
+            name[5] = "";
+            name[6] = "T";
+            name[7] = "E";
+            name[8] = "A";
+            name[9] = "M";
+            System.out.println("\n");
+            System.out.print("\t");
+            for(int i = 0; i < 10; i++)
             {
                latence(545);
-               System.out.print(" .");
+               System.out.print("\t"+name[i]);
             }
 
+            System.out.println("\n");
+            System.out.print("\t     ");
+            for(int i = 0; i < 80; i++)
+            {
+               latence(100);
+               if (i <= 39) {
+                  System.out.print(">");
+               } else if(i == 40) {
+                  System.out.print("*");
+               } else {
+                  System.out.print("<");
+               }
+            }
             
+            latence(1000);
+            ClearConsole();
+
+            System.out.print("\n\n  Chargement des modules...");
+            for(int i = 1; i < 101; i += 5)
+            {
+               latence(200);
+               System.out.print("# # ");
+               if (i == 96) {
+                  System.out.print("100%");
+               }
+            }
+            latence(1000);
+            ClearConsole();
+            System.out.print("\n\n  Chargement terminé. Lancement du programme.");
+            latence(3000);
+            ClearConsole();
 
       do
       {
-         ClearConsole();
-          int option = -1;
-          latence(200);
-          System.out.println("0. Fermer le programme. ");
-          latence(200);
-          System.out.println("1. Reserver une table. ");
-          latence(200);
-          System.out.println("2. Voir le Menu.  ");
-          latence(200);
-          System.out.println("3. Passer une commande. ");
-          latence(200);
-          System.out.println("4. Voir la consommation. ");
-          latence(200);
-          System.out.println("5. Facture. ");
-          latence(70);
-          System.out.print(":: >>> ");
-          option = Saisir.Saissir_Entier();
+            ClearConsole();
+            System.out.println("==============================================================");
+            System.out.println("=========                                            =========");
+            System.out.println("====        😎 BIENVENUE DANS OTAKU's RESTAURANT 🤩         ====");
+            System.out.println("=========                                            =========");
+            System.out.println("==============================================================");
+            int option = -1;
+            latence(200);
+            System.out.println("0. Fermer le programme. ");
+            latence(200);
+            System.out.println("1. Reserver une table. ");
+            latence(200);
+            System.out.println("2. Voir le Menu.  ");
+            latence(200);
+            System.out.println("3. Passer une commande. ");
+            latence(200);
+            System.out.println("4. Voir la consommation. ");
+            latence(200);
+            System.out.println("5. Facture. ");
+            latence(70);
+            System.out.print(":: >>> ");
+            option = Saisir.Saissir_Entier();
           switch(option)
           {
               case 0:
@@ -73,7 +112,7 @@ public class App
                  id = Saisir.Saissir_Entier();
                  }while(id >= Table.getNbrTable());
                  if(Table.getTableState(id) == 0)
-                     reserv.add(new Table(id));
+                  reserv.add(new Table(id));
                   else
                     System.out.println("\nTable occupe!");
                  break;
@@ -198,11 +237,5 @@ public class App
           choice = Saisir.Saissir_Entier();
 
       }while(choice != 0);
-
-
-            
-
-
-}
-
+   }
 }
