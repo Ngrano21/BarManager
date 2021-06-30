@@ -186,13 +186,11 @@ public class Table
           {
             App.latence(160);
             System.out.print("\n... "+ bg.next());
-            if(bg.hasNextInt())
-                   System.out.print(" : "+ bg.nextInt() +"FBU");
-            else
+            while(!bg.hasNextInt())
             {
-               System.out.print(" "+ bg.next());
-               System.out.print(" : "+ bg.nextInt() +"FBU");
+                System.out.print(" "+ bg.next());
             }
+            System.out.print(" : "+ bg.nextInt() +"FBU");
             System.out.print(" *"+ bg.nextInt() + " : ");
             total = bg.nextInt();
             System.out.print(total +"FBU");
@@ -229,13 +227,11 @@ public class Table
           {
             App.latence(160);
             System.out.print("\n... "+ bg.next());
-            if(bg.hasNextInt())
-                System.out.print(" : "+ bg.nextInt() +"FBU");
-            else
+            while(!bg.hasNextInt())
             {
                 System.out.print(" "+ bg.next());
-                System.out.print(" : "+ bg.nextInt() +"FBU");
             }
+            System.out.print(" : "+ bg.nextInt() +"FBU");
             System.out.print(" *"+ bg.nextInt() + " : ");
             total = bg.nextInt();
             System.out.print(total +"FBU");
