@@ -1,14 +1,14 @@
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
+/**
+ * author Ngrano21
+ */
 
 public class Table 
 {
@@ -16,11 +16,10 @@ public class Table
     private static int nbrTable = 25; 
     private static int reservation[] = new int[nbrTable];
     private File temp = null;
-     private FileWriter obj = null;
-     private PrintWriter wr = null;
+    private FileWriter obj = null;
+    private PrintWriter wr = null;
     
     /* --- CONSTRUCTOR --- **/
-
 
     public Table(int num) throws IOException
     {
@@ -71,9 +70,10 @@ public class Table
  /** 
   * @param t
   */
- /*------------------------------------------------------------------------------------------------------------------------------------------------ */
+ 
+ /*---------------------------------------------------------------------------------------------------------------*/
 
-                         /* --- SETERS --- */
+    /* --- SETERS --- */
 
     public void setTableId(int t)
     {
@@ -101,37 +101,33 @@ public class Table
         return nbrTable;
     }
  
- /** 
-  * @param t
-  * @throws IOException
-  */
- /*------------------------------------------------------------------------------------------------------------------------------------------------ */
-                         /* ---Method --- */
+    /** 
+     * @param t
+    * @throws IOException
+    */
+    /*-------------------------------------------------------------------------------------------------------------*/
+    /* ---Method --- */
 
-    /* --- Temp File creation --- */
+    // Temp File creation
 
     public void createTempBillFile() throws IOException
     {
-            
 
-            
-            
-               try {
-                this.temp = File.createTempFile("temp", null, new File("temp"));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-               if(this.temp.exists())
-               {
-                   //System.out.println("\nFile created :" + this.temp.getAbsolutePath());
-               }
-               else
-               {
-                   System.out.println("\nLe fichier n'as pas ete creer");
-               }
-         
-       
+        try 
+        {
+            this.temp = File.createTempFile("temp", null, new File("temp"));
+        } catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        if(this.temp.exists())
+        {
+            //System.out.println("\nFile created :" + this.temp.getAbsolutePath());
+        }
+        else
+        {
+            System.out.println("\nLe fichier n'as pas ete creer");
+        }
     }
 
     
@@ -144,14 +140,9 @@ public class Table
 
     public void writeTempBillFile( String nameP, int prixU, int quantity) throws IOException
     {
-        
-
-            
-                  wr.printf("%s %d %d %d \n", nameP, prixU, quantity, prixU *quantity);
-                  wr.flush();
-                  //wr.close();
-                 System.out.println("\nLe fiechier a bien ete closed");
-
+       
+        wr.printf("%s %d %d %d \n", nameP, prixU, quantity, prixU *quantity);
+        wr.flush();
     }
 
     
@@ -164,12 +155,10 @@ public class Table
     {
         if(this.temp.delete())
         {
-            //System.out.println("\nTemp file deleted !");
             return true;
         }
         else
         {
-           // System.out.println("\nErreur de supression");
             return false;
         }
     }
@@ -195,21 +184,19 @@ public class Table
           System.out.println("\nLa consommation actuel a la table "+getTableId()+ " est de :");
           while(bg.hasNext())
           {
-             App.latence(160);
-             System.out.print("\n... "+ bg.next());
-             if(bg.hasNextInt())
+            App.latence(160);
+            System.out.print("\n... "+ bg.next());
+            if(bg.hasNextInt())
                    System.out.print(" : "+ bg.nextInt() +"FBU");
-             else
-             {
-                System.out.print(" "+ bg.next());
-                System.out.print(" : "+ bg.nextInt() +"FBU");
-             }
-             System.out.print(" *"+ bg.nextInt() + " : ");
-             total = bg.nextInt();
-             System.out.print(total +"FBU");
-             totalBill += total;
-             
-
+            else
+            {
+               System.out.print(" "+ bg.next());
+               System.out.print(" : "+ bg.nextInt() +"FBU");
+            }
+            System.out.print(" *"+ bg.nextInt() + " : ");
+            total = bg.nextInt();
+            System.out.print(total +"FBU");
+            totalBill += total;
           }
           App.latence(75);
           System.out.println("\n\t Total Actuel : "+ totalBill +"FBU");
@@ -241,19 +228,18 @@ public class Table
           while(bg.hasNext())
           {
             App.latence(160);
-             System.out.print("\n... "+ bg.next());
-             if(bg.hasNextInt())
-                   System.out.print(" : "+ bg.nextInt() +"FBU");
-             else
-             {
+            System.out.print("\n... "+ bg.next());
+            if(bg.hasNextInt())
+                System.out.print(" : "+ bg.nextInt() +"FBU");
+            else
+            {
                 System.out.print(" "+ bg.next());
                 System.out.print(" : "+ bg.nextInt() +"FBU");
-             }
-             System.out.print(" *"+ bg.nextInt() + " : ");
-             total = bg.nextInt();
-             System.out.print(total +"FBU");
-             totalBill += total;
-             
+            }
+            System.out.print(" *"+ bg.nextInt() + " : ");
+            total = bg.nextInt();
+            System.out.print(total +"FBU");
+            totalBill += total;
 
           }
           App.latence(75);
@@ -317,8 +303,5 @@ public class Table
         System.out.println("\n"+ count +" sont siponible.");
     }
 
-    /* --- Bills Log file --- */
-
-
-                    /* --- END --- */
+    /* --- END --- */
 }

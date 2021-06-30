@@ -1,12 +1,9 @@
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-//import java.util.Scanner;
-
 
 /**
  * @author Estimé Jésus
- *
  */
 public class Product {
 	private int id;
@@ -43,7 +40,6 @@ public class Product {
 		produit.add(produit7);
 		produit.add(produit8);
 		produit.add(produit9);
-
 	}
      
 	public int getId() {

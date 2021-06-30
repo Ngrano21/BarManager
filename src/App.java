@@ -1,11 +1,11 @@
 
 import java.io.IOException;
 import java.lang.Thread;
-//import java.util.Scanner;
-
-//import javax.lang.model.util.ElementScanner14;
-
 import java.util.ArrayList;
+
+/**
+ * author b3rking
+ */
 
 public class App 
 {
@@ -80,7 +80,7 @@ public class App
             ClearConsole();
             System.out.println("==============================================================");
             System.out.println("=========                                            =========");
-            System.out.println("====        😎 BIENVENUE DANS OTAKU's RESTAURANT 🤩         ====");
+            System.out.println("====        😎 BIENVENUE DANS OTAKU's RESTAURANT 🤩       ====");
             System.out.println("=========                                            =========");
             System.out.println("==============================================================");
             int option = -1;
@@ -237,5 +237,7 @@ public class App
           choice = Saisir.Saissir_Entier();
 
       }while(choice != 0);
+      System.out.print("\n");
+      System.out.print("Bye!, revenez bientot😘");
    }
 }
