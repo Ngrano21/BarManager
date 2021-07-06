@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,6 +6,9 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
+
 
 /**
  * author Ngrano21
@@ -16,6 +20,8 @@ public class Table
     private static int nbrTable = 25; 
     private static int reservation[] = new int[nbrTable];
     private File temp = null;
+    private File log = new File("log.txt");
+    private File verify = new File("temp");
     private FileWriter obj = null;
     private PrintWriter wr = null;
     
@@ -112,17 +118,38 @@ public class Table
 
     public void createTempBillFile() throws IOException
     {
+      try
+      {
+        if(verify.mkdir())
+        {
+
+        }
+        else
+        {
+            System.out.println("Le dossier existe ou n'as pas ete cree.");
+        }
+      }
+      catch (SecurityException e)
+      {
+          System.out.println("Exceptions security ");
+          e.printStackTrace();
+      }
+
+      if(log.createNewFile())
+      {
+          
+      }
 
         try 
         {
-            this.temp = File.createTempFile("temp", null, new File("temp"));
+            this.temp = File.createTempFile("temp", null, new File(verify.getAbsolutePath()));
         } catch (IOException e) 
         {
             e.printStackTrace();
         }
         if(this.temp.exists())
         {
-            //System.out.println("\nFile created :" + this.temp.getAbsolutePath());
+            
         }
         else
         {
@@ -222,7 +249,12 @@ public class Table
         try
         {
           Scanner bg = new Scanner(this.temp);
-          System.out.println("\nTable "+ getTableId() +" votre Facture est de :");
+          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+          LocalDateTime now = LocalDateTime.now();
+          String date = dtf.format(now);
+
+          System.out.print("\n    "+ date +"\n");
+          System.out.println("Table "+ getTableId() +" votre Facture est de :");
           while(bg.hasNext())
           {
             App.latence(160);
@@ -240,6 +272,31 @@ public class Table
           }
           App.latence(75);
           System.out.println("\n\t Facture : "+ totalBill +"FBU");
+          if(log.canRead() && log.canWrite())
+          {
+              Scanner lg = new Scanner(temp);
+              BufferedWriter logf = new BufferedWriter(new FileWriter(log, true));
+              logf.append(date +" : Table -"+ getTableId()+"\n");
+              //logf.flush();
+              String tmp = "";
+              while(lg.hasNextLine())
+              {
+                  tmp = lg.nextLine();
+                  logf.append(tmp +"\n");
+                  //logf.flush();
+              }
+              logf.append("\n\t   Total : " +totalBill);
+              logf.append("\n---------------------------------------\n\n");
+
+
+              lg.close();
+              logf.close();
+
+          }
+          else
+          {
+              System.out.print("\n the log file can't be read or written");
+          }
           bg.close();
         }
         catch(IOException e)
@@ -262,6 +319,11 @@ public class Table
 
     public static void setAllFree()
     {
+        File del = new File("temp");
+        if(del.delete())
+        {
+
+        }
         int i;
         for( i = 0; i < nbrTable;i++)
            reservation[i] = 0;
