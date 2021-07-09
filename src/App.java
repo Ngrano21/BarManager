@@ -92,9 +92,13 @@ public class App
             latence(200);
             System.out.println("3. Passer une commande. ");
             latence(200);
-            System.out.println("4. Voir la consommation. ");
+            System.out.println("4. consommation Actuel. ");
             latence(200);
             System.out.println("5. Facture. ");
+            latence(200);
+            System.out.println("6. Voir l'historique des factures. ");
+            latence(200);
+            System.out.println("7. Voir l'historique des factures a une date precise. ");
             latence(70);
             System.out.print(":: >>> ");
             option = Saisir.Saissir_Entier();
@@ -227,13 +231,27 @@ public class App
                  re_bill = Saisir.Saissir_Entier();
                  
                 }while(re_bill != 0);
+                break;
+              case 6 :
+                System.out.println();
+                Table.showLog();
+                break;
+              case 7 :
+                String date = "";
+                System.out.print("\nentrez la date sous le format : \nAnnee/mois/jour : ");
+                date = Saisir.Saisie_Caracteres();
+                System.out.println();
+                Table.showSearchedLog(date);
+                break;
               default :
                 System.out.print("\nCette option n'existe pas, choisissez en une aurtes !");
+                break;
           }
           
           System.out.print("\n\n--------------------------------------------");
           System.out.print("\n0. Pour arreter le programme\n1. Pour continuer\n>>> ");
           choice = Saisir.Saissir_Entier();
+          ClearConsole();
 
       }while(choice != 0);
       System.out.print("\n");

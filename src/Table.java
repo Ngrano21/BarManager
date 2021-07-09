@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,7 +21,7 @@ public class Table
     private static int nbrTable = 25; 
     private static int reservation[] = new int[nbrTable];
     private File temp = null;
-    private File log = new File("log.txt");
+    private static File log = new File("log.txt");
     private File verify = new File("temp");
     private FileWriter obj = null;
     private PrintWriter wr = null;
@@ -126,7 +127,7 @@ public class Table
         }
         else
         {
-            System.out.println("Le dossier existe ou n'as pas ete cree.");
+
         }
       }
       catch (SecurityException e)
@@ -153,7 +154,7 @@ public class Table
         }
         else
         {
-            System.out.println("\nLe fichier n'as pas ete creer");
+            System.out.println("\nLe fichier n'a pas ete creer");
         }
     }
 
@@ -255,6 +256,7 @@ public class Table
 
           System.out.print("\n    "+ date +"\n");
           System.out.println("Table "+ getTableId() +" votre Facture est de :");
+
           while(bg.hasNext())
           {
             App.latence(160);
@@ -268,8 +270,9 @@ public class Table
             total = bg.nextInt();
             System.out.print(total +"FBU");
             totalBill += total;
-
+          
           }
+          
           App.latence(75);
           System.out.println("\n\t Facture : "+ totalBill +"FBU");
           if(log.canRead() && log.canWrite())
@@ -312,6 +315,76 @@ public class Table
         }
         else
           System.out.println("\nErreur de suppression \na la facturation.");
+    }
+
+    /* --- Show Bill log or HIstoric --- */
+    
+    public static void showLog()
+    {
+        try
+        {
+            if(log.exists())
+            {
+               Scanner hist = new Scanner(log);
+               while(hist.hasNext())
+               {
+                   System.out.println(hist.nextLine());
+               }
+               hist.close();
+            }
+            else
+            {
+                System.out.println("The log file doesn't exist. ");
+            }
+
+
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Erreur : "+ e.getMessage());
+        }
+    }
+
+    /* --- Search by date the bills --- */
+
+    public static void showSearchedLog(String t)
+    {
+        String limit = "---------------------------------------";
+        try
+        {
+            if(log.exists())
+            {
+                Scanner bf = new Scanner(log);
+                String temp;
+                while(bf.hasNextLine())
+                {
+                    temp = bf.nextLine();
+                    if(temp.contains(t))
+                    {
+                        System.out.println(temp);
+                        while(bf.hasNextLine())
+                        {
+                            temp = bf.nextLine();
+                            System.out.println(temp);
+                            if(temp.contains(limit))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                bf.close();
+            }
+            else
+            {
+                System.out.println("Le fichier log n'existe pas");
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 
