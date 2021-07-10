@@ -350,6 +350,7 @@ public class Table
     public static void showSearchedLog(String t)
     {
         String limit = "---------------------------------------";
+        boolean verification = false;
         try
         {
             if(log.exists())
@@ -361,6 +362,7 @@ public class Table
                     temp = bf.nextLine();
                     if(temp.contains(t))
                     {
+                        verification = true;
                         System.out.println(temp);
                         while(bf.hasNextLine())
                         {
@@ -373,6 +375,8 @@ public class Table
                         }
                     }
                 }
+                if(!verification)
+                  System.out.println("Aucune facture touver pour cette date : "+t);
                 bf.close();
             }
             else
@@ -383,6 +387,62 @@ public class Table
         catch(FileNotFoundException e)
         {
             e.printStackTrace();
+        }
+
+    }
+    /* --- Search by date the bills --- */
+
+    public static void showSearchedLogTb(int t)
+    {
+        String limit = "---------------------------------------";
+        String tp = null;
+        boolean verification = false;
+
+        if(t <= getNbrTable())
+        {
+          tp = (new StringBuilder()).append("-").append(String.valueOf(t)).toString();
+          try
+          {
+            if(log.exists())
+            {
+                Scanner bf = new Scanner(log);
+                String temp;
+                while(bf.hasNextLine())
+                {
+                    temp = bf.nextLine();
+                    if(temp.contains(tp))
+                    {
+                        verification = true;
+                        System.out.println(temp);
+                        while(bf.hasNextLine())
+                        {
+                            temp = bf.nextLine();
+                            System.out.println(temp);
+                            if(temp.contains(limit))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(!verification)
+                   System.out.println("Aucune facture trouver pour la table -"+t);
+
+                bf.close();
+            }
+            else
+            {
+                System.out.println("Le fichier log n'existe pas");
+            }
+          }
+          catch(FileNotFoundException e)
+          {
+            e.printStackTrace();
+          }
+        }
+        else
+        {
+            System.out.println("cette table n'existe pas");
         }
 
     }

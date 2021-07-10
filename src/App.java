@@ -99,6 +99,8 @@ public class App
             System.out.println("6. Voir l'historique des factures. ");
             latence(200);
             System.out.println("7. Voir l'historique des factures a une date precise. ");
+            latence(200);
+            System.out.println("8. Voir l'historique des factures d'une table precise. ");
             latence(70);
             System.out.print(":: >>> ");
             option = Saisir.Saissir_Entier();
@@ -242,6 +244,18 @@ public class App
                 date = Saisir.Saisie_Caracteres();
                 System.out.println();
                 Table.showSearchedLog(date);
+                break;
+              case 8 :
+                int tabl = -1;
+                do
+                {
+                  System.out.print("\nentrez le numero de table : ");
+                  tabl = Saisir.Saissir_Entier();
+                  if(tabl < 1)
+                    System.out.println("cette table n'existe pas");
+                }while(tabl < 1);
+                System.out.println();
+                Table.showSearchedLogTb(tabl);
                 break;
               default :
                 System.out.print("\nCette option n'existe pas, choisissez en une aurtes !");
