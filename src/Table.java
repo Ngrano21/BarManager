@@ -223,7 +223,7 @@ public class Table
         try
         {
           Scanner bg = new Scanner(this.temp);
-          System.out.println("\nLa consommation actuel a la table "+getTableId()+ " est de :");
+          System.out.println("\nLa consommation actuel a la table "+(getTableId() + 1)+ " est de :");
           while(bg.hasNext())
           {
             App.latence(160);
