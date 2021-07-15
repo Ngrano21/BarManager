@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +19,7 @@ public class Table
 {
     private int tableId;
     private static int nbrTable = 25; 
+    private static int iniNbrTable = nbrTable;
     private static int reservation[] = new int[nbrTable];
     private File temp = null;
     private static File log = new File("log.txt");
@@ -30,7 +31,7 @@ public class Table
 
     public Table(int num) throws IOException
     {
-        setTableId(num);
+        
         //--- Table availability verification 
 
         if(nbrTable > 0)
@@ -38,8 +39,9 @@ public class Table
 
             // --- Table number verification
 
-            if(getTableId() < nbrTable)
+            if(num < getInitNbrTable() && num > 0)
             {
+                
 
                 // --- Enter table number verification
 
@@ -47,7 +49,7 @@ public class Table
                 {
                     setTableId(num);
                     setOccupied(getTableId());
-                    System.out.println("\nLa table "+getTableId()+" est maintenant prise.");
+                    System.out.println("\nLa table "+ (getTableId() + 1) +" est maintenant prise.");
                     
                     //File temp = null;
                     createTempBillFile();
@@ -100,12 +102,24 @@ public class Table
 
     public static int getTableState(int t)
     {
-        return reservation[t];
+        try
+        {
+           return reservation[t];
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            return -1;
+        }
     }
 
     public static int getNbrTable()
     {
         return nbrTable;
+    }
+
+    public static int getInitNbrTable()
+    {
+        return iniNbrTable;
     }
  
     /** 
@@ -392,7 +406,7 @@ public class Table
     }
     /* --- Search by date the bills --- */
 
-    public static void showSearchedLogTb(int t)
+    public static void showSearchedLog(int t)
     {
         String limit = "---------------------------------------";
         String tp = null;
@@ -411,6 +425,62 @@ public class Table
                 {
                     temp = bf.nextLine();
                     if(temp.contains(tp))
+                    {
+                        verification = true;
+                        System.out.println(temp);
+                        while(bf.hasNextLine())
+                        {
+                            temp = bf.nextLine();
+                            System.out.println(temp);
+                            if(temp.contains(limit))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(!verification)
+                   System.out.println("Aucune facture trouver pour la table -"+t);
+
+                bf.close();
+            }
+            else
+            {
+                System.out.println("Le fichier log n'existe pas");
+            }
+          }
+          catch(FileNotFoundException e)
+          {
+            e.printStackTrace();
+          }
+        }
+        else
+        {
+            System.out.println("cette table n'existe pas");
+        }
+
+    }
+    /* --- Search bills by datae and by table --- */
+
+    public static void showSearchedLog( int t, String D)
+    {
+        String limit = "---------------------------------------";
+        String tp = null;
+        boolean verification = false;
+
+        if(t <= getNbrTable())
+        {
+          tp = (new StringBuilder()).append("-").append(String.valueOf(t)).toString();
+          try
+          {
+            if(log.exists())
+            {
+                Scanner bf = new Scanner(log);
+                String temp;
+                while(bf.hasNextLine())
+                {
+                    temp = bf.nextLine();
+                    if(temp.contains(tp) && temp.contains(D))
                     {
                         verification = true;
                         System.out.println(temp);
@@ -482,16 +552,43 @@ public class Table
 
     /* --- Free table count --- */
 
-    public void countFree()
+    public static void showFree()
     {
-        int i, count = 0;
-        for( i = 0; i < nbrTable; i++)
+        int count = 0;
+        System.out.print("Les tables disponibles sont : ");
+        for(int i = 0; i < getInitNbrTable(); i++)
         {
+            
             if(reservation[i] == 0)
-               count++;
+            {
+                count++;
+                System.out.print("-   "+ (i+1) +"   ");
+            }
         }
+        System.out.println("\n"+ count +" table de libre");
+    }
 
-        System.out.println("\n"+ count +" sont siponible.");
+    /**
+     *@clearFolder delete temp folder when empty at the exit of program
+     */
+    /* --- Free table count --- */
+
+    public static void clearFolder()
+    {
+        File del = new File("temp");
+        if(del.exists())
+        {
+            String[] files = del.list();
+            if(files.length < 0)
+            {
+                if(del.delete())
+                {}
+                else
+                {
+                    System.out.println("Le dossier temp n'as pas ete supprimer");
+                }
+            }
+        }
     }
 
     /* --- END --- */

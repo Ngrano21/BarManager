@@ -101,25 +101,38 @@ public class App
             System.out.println("7. Voir l'historique des factures a une date precise. ");
             latence(200);
             System.out.println("8. Voir l'historique des factures d'une table precise. ");
+            latence(200);
+            System.out.println("9. Voir l'historique des factures d'une table precise a une date precise. ");
             latence(70);
             System.out.print(":: >>> ");
             option = Saisir.Saissir_Entier();
           switch(option)
           {
               case 0:
+                 Table.clearFolder();
                  System.exit(0);
                  break;
               case 1:
                  ClearConsole();
                  int id;
+                 Table.showFree();
                  do{
-                 System.out.print("\nNumero de la table ? >>> ");
-                 id = Saisir.Saissir_Entier();
-                 }while(id >= Table.getNbrTable());
+                     System.out.print("\nNumero de la table ? >>> ");
+                     id = Saisir.Saissir_Entier();
+                   }while(id >= Table.getNbrTable() && id < 1);
+                 id -= 1;
                  if(Table.getTableState(id) == 0)
+                 {
                   reserv.add(new Table(id));
-                  else
+                 }
+                 else if(Table.getTableState(id) == -1)
+                 {
+                    System.out.println("\nCette table n'existe pas.");
+                 }
+                 else
+                 {
                     System.out.println("\nTable occupe!");
+                 }
                  break;
               case 2 :
                  ClearConsole();
@@ -137,8 +150,12 @@ public class App
                     
                     do
                     {
-                     System.out.print("\nEntrez le numero de la table >>> ");
+                     do
+                     {
+                       System.out.print("\nEntrez le numero de la table >>> ");
                        idt = Saisir.Saissir_Entier();
+                     }while(idt < 1);
+                       idt -= 1;
                        for( int i = 0; i < reserv.size(); i++)
                        {
                           if(reserv.get(i).getTableId() == idt)
@@ -178,10 +195,15 @@ public class App
                  do
                  {
                     int revoir_idt,revoir_idx = -1;
-                    System.out.print("Entrez le numero de la table >>> ");
+                    
                     do
                     {
+                     do
+                     {
+                       System.out.print("Entrez le numero de la table >>> ");
                        revoir_idt = Saisir.Saissir_Entier() ;
+                     }while(revoir_idt < 1);
+                       revoir_idt -= 1;
                        for( int i = 0; i < reserv.size(); i++)
                        {
                           if(reserv.get(i).getTableId() == revoir_idt)
@@ -206,13 +228,19 @@ public class App
               case 5 :
                 ClearConsole();
                 int re_bill = -1;
+                int bill_idt,bill_idx = -1;
                 do
                 {
-                 int bill_idt,bill_idx = -1;
-                 System.out.print("Entrez le numero de la table >>> ");
+                 
+                 
                  do
                  {
+                  do
+                  {
+                    System.out.print("Entrez le numero de la table >>> ");
                     bill_idt = Saisir.Saissir_Entier();
+                  }while(bill_idt < 1);
+                    bill_idt -= 1;
                     for( int i = 0; i < reserv.size(); i++)
                     {
                        if(reserv.get(i).getTableId() == bill_idt)
@@ -229,7 +257,7 @@ public class App
                     reserv.get(bill_idx).billGenerator();
                     reserv.remove(bill_idx);
                  }
-                 System.out.print("\n1. Pour refaire une commande.\n0. Pour arreter de commander.\n>>> ");
+                 System.out.print("\n1. Pour refaire une Facture.\n0. Pour arreter .\n>>> ");
                  re_bill = Saisir.Saissir_Entier();
                  
                 }while(re_bill != 0);
@@ -255,7 +283,23 @@ public class App
                     System.out.println("cette table n'existe pas");
                 }while(tabl < 1);
                 System.out.println();
-                Table.showSearchedLogTb(tabl);
+                Table.showSearchedLog(tabl);
+                break;
+              case 9 :
+                String dat = "";
+                System.out.print("\nentrez la date sous le format : \nAnnee/mois/jour : ");
+                dat = Saisir.Saisie_Caracteres();
+                System.out.println();
+                int tae = -1;
+                do
+                {
+                  System.out.print("\nentrez le numero de table : ");
+                  tae = Saisir.Saissir_Entier();
+                  if(tae < 1)
+                    System.out.println("cette table n'existe pas");
+                }while(tae < 1);
+                System.out.println();
+                Table.showSearchedLog(tae,dat);
                 break;
               default :
                 System.out.print("\nCette option n'existe pas, choisissez en une aurtes !");
