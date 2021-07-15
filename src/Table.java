@@ -39,7 +39,7 @@ public class Table
 
             // --- Table number verification
 
-            if(num < getInitNbrTable() && num > 0)
+            if(num < getInitNbrTable() )
             {
                 
 
@@ -64,7 +64,7 @@ public class Table
             }
             else
             {
-                System.out.println("\ncCe numero de table n'existe pas!");
+                System.out.println("\nCe numero de table n'existe pas!");
             }
 
         }
@@ -223,7 +223,7 @@ public class Table
         try
         {
           Scanner bg = new Scanner(this.temp);
-          System.out.println("\nLa consommation actuel a la table "+getTableId()+ " est de :");
+          System.out.println("\nLa consommation actuel a la table "+ (getTableId() + 1) + " est de :");
           while(bg.hasNext())
           {
             App.latence(160);
@@ -239,7 +239,7 @@ public class Table
             totalBill += total;
           }
           App.latence(75);
-          System.out.println("\n\t Total Actuel : "+ totalBill +"FBU");
+          System.out.println("\n\n\t Total Actuel : "+ totalBill +"FBU");
           bg.close();
         }
         catch(IOException e)
@@ -269,7 +269,7 @@ public class Table
           String date = dtf.format(now);
 
           System.out.print("\n    "+ date +"\n");
-          System.out.println("Table "+ getTableId() +" votre Facture est de :");
+          System.out.println("Table "+ (getTableId() + 1) +" votre Facture est de :");
 
           while(bg.hasNext())
           {
@@ -288,12 +288,12 @@ public class Table
           }
           
           App.latence(75);
-          System.out.println("\n\t Facture : "+ totalBill +"FBU");
+          System.out.println("\n\n\t Facture : "+ totalBill +"FBU");
           if(log.canRead() && log.canWrite())
           {
               Scanner lg = new Scanner(temp);
               BufferedWriter logf = new BufferedWriter(new FileWriter(log, true));
-              logf.append(date +" : Table -"+ getTableId()+"\n");
+              logf.append(date +" : Table -"+ ( getTableId() + 1) +"\n");
               //logf.flush();
               String tmp = "";
               while(lg.hasNextLine())

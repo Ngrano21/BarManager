@@ -171,11 +171,12 @@ public class App
                     }
                     else
                     {
-                        System.out.print("\nEntrez le numero du Produit >>> ");
+                        
                       do
                       {
+                         System.out.print("\nEntrez le numero du Produit >>> ");
                          com = Saisir.Saissir_Entier();
-                      }while(com < 0);
+                      }while(com < 0 || com > Product.product_list.size());
 
                         System.out.print("\nEntrez la quantite >>> ");
                       do
@@ -228,11 +229,9 @@ public class App
               case 5 :
                 ClearConsole();
                 int re_bill = -1;
-                int bill_idt,bill_idx = -1;
                 do
                 {
-                 
-                 
+                  int bill_idt,bill_idx = -1;
                  do
                  {
                   do
